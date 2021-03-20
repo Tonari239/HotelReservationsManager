@@ -1,0 +1,12 @@
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.deps.json
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.runtimeconfig.json
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.runtimeconfig.dev.json
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.dll
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\bin\Debug\netcoreapp3.1\DataLibrary.pdb
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.AssemblyInfo.cs
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.dll
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.pdb
+C:\Users\Admin\source\repos\HotelReservationsManager\DataLibrary\obj\Debug\netcoreapp3.1\DataLibrary.genruntimeconfig.cache
