@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {}
+    "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
+    "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
+        "projectUniqueName": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
         "projectName": "DataLibrary",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
+        "projectPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\obj\\",
+        "outputPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {}
+    "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
+    "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
+        "projectUniqueName": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
         "projectName": "DataLibrary",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
+        "projectPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\obj\\",
+        "outputPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -87,14 +87,14 @@
         }
       }
     },
-    "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {
+    "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
+        "projectUniqueName": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
         "projectName": "HotelReservationsManager",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
+        "projectPath": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\HotelReservationsManager\\obj\\",
+        "outputPath": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -114,8 +114,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj"
+              "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
+                "projectPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj"
               }
             }
           }

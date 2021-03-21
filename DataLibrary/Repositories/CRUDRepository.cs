@@ -43,20 +43,35 @@ namespace DataLibrary.Repositories
         }
 
          public int Count(Expression<Func<T, bool>> expression)
-        {
+         {
             return _dbSet.Count(expression);
-        }
+         }
 
         public IQueryable Get(Expression<Func<T,bool>> expression)
         {
             return _dbSet.Where(expression).AsQueryable();
         }
 
-        public T GetById(int id)
+        public IQueryable GetAll()
         {
+            return _dbSet.AsQueryable();
+        }
+
+        public T GetById(int? id)
+        {
+            if (id==null)
+            {
+                return null;
+            }
            return _dbSet.Find(id);
         }
 
+        public IQueryable OrderBy(Func<T,bool> expression)
+        {
+            return _dbSet.OrderBy(expression).AsQueryable();
+        }
+
+        
 
     }
 }

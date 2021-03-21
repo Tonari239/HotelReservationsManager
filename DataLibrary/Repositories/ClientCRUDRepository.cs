@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataLibrary.Repositories
 {
-    class ClientCRUDRepository :CRUDRepository<Client>
+    public class ClientCRUDRepository :CRUDRepository<Client>
     {
         public ClientCRUDRepository(HotelDbContext Context):base(Context,Context.Clients)
         {
