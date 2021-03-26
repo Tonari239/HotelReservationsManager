@@ -20,15 +20,26 @@ namespace DataLibrary.Repositories
             this._dbSet = DBSet;
         }
 
-        public void Add(T item)
+        public bool Add(T item)
         {
+            if (_dbSet.Contains(item))
+            {
+                return false;
+            }
             _dbSet.Add(item);
+            _context.SaveChanges();
+            return true;
             
         }
-        public void Remove(T item)
+        public bool Remove(T item)
         {
+            if (!_dbSet.Contains(item))
+            {
+                return false;
+            }
             _dbSet.Remove(item);
             _context.SaveChanges();
+            return true;
         }
         
         public void Update(T entity)
@@ -59,7 +70,7 @@ namespace DataLibrary.Repositories
 
         public T GetById(int? id)
         {
-            if (id==null)
+            if (id==null || id ==0)
             {
                 return null;
             }

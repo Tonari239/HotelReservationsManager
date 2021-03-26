@@ -21,7 +21,7 @@ namespace DataLibrary
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasOne(user => user.Reservation).WithOne(reservation => reservation.User);
+            modelBuilder.Entity<User>().HasMany(user => user.Reservations).WithOne(reservation => reservation.User);
             modelBuilder.Entity<Room>().HasOne(room => room.Reservation).WithOne(reservation => reservation.Room);
             modelBuilder.Entity<Reservation>().HasMany(reservation => reservation.Clients).WithOne(client => client.Reservation);
         }

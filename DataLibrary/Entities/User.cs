@@ -33,6 +33,11 @@ namespace DataLibrary.Entities
 
         //Navigation Properties
         
-        public virtual Reservation Reservation { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
+
+        public User()
+        {
+            Reservations = new HashSet<Reservation>();
+        }
     }
 }

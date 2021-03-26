@@ -15,7 +15,17 @@ namespace DataLibrary.Entities
 
         public string Type { get; set; }
 
-        public bool IsFree { get; set; }
+        private bool isFree;
+
+        public bool IsFree
+        {
+            get { return isFree; }
+            set 
+            {
+               isFree= DateTime.Compare(Reservation.LeaveDate, DateTime.Now) <= 0 ? true : false;
+            }
+        }
+
 
         public decimal BedPriceForAdult { get; set; }
 
