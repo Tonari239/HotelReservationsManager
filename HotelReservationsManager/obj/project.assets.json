@@ -9241,23 +9241,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\werbe\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
+      "projectUniqueName": "D:\\Downloads\\HotelReservationsManager-master\\HotelReservationsManager\\HotelReservationsManager.csproj",
       "projectName": "HotelReservationsManager",
-      "projectPath": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\obj\\",
+      "projectPath": "D:\\Downloads\\HotelReservationsManager-master\\HotelReservationsManager\\HotelReservationsManager.csproj",
+      "packagesPath": "C:\\Users\\werbe\\.nuget\\packages\\",
+      "outputPath": "D:\\Downloads\\HotelReservationsManager-master\\HotelReservationsManager\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\werbe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9271,8 +9272,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
-              "projectPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj"
+            "D:\\Downloads\\HotelReservationsManager-master\\DataLibrary\\DataLibrary.csproj": {
+              "projectPath": "D:\\Downloads\\HotelReservationsManager-master\\DataLibrary\\DataLibrary.csproj"
             }
           }
         }
@@ -9342,7 +9343,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

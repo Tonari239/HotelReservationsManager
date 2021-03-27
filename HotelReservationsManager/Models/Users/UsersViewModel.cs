@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAnnotationsExtensions;
 using HotelReservationsManager.Attributes;
 
 namespace HotelReservationsManager.Models
 {
-    public class UserViewModel :BaseViewModel
+    public class UsersViewModel :BaseViewModel
     {
+
+
         [Required]
         [Display(Name ="Потребителско име")]
          public string Username { get; set; }
+
+        public string Password { get; set; }
 
         [Required]
         [Display(Name = "Име")]
@@ -30,13 +33,13 @@ namespace HotelReservationsManager.Models
         [MaxLength(10,ErrorMessage ="Моля въведете валидно ЕГН")]
         [Required]
         [Display(Name = "ЕГН")]
-        public int CivilNumber { get; set; } // ЕГН
+        public string CivilNumber { get; set; } // ЕГН
 
 
         [MaxLength(10,ErrorMessage ="Моля въведете валиден телефонен номер!")]
         [Required]
         [Display(Name = "Телефонен номер")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
 
         [EmailAddress(ErrorMessage ="Моля въведете валиден имейл адрес!")]
@@ -49,16 +52,15 @@ namespace HotelReservationsManager.Models
         [Display(Name = "Дата на назначаване")]
         public DateTime EmploymentDate { get; set; }
 
-        
+        [DateValidation]
+        [Display(Name = "Дата на освобождаване")]
+        public DateTime? LeavingDate { get; set; }
+
         [Display(Name = "Активен")]
         public bool IsActive { get; set; }
 
-        [DateValidation]
-        [Display(Name = "Дата на освобождаване")]
-        public DateTime LeavingDate { get; set; } 
-
         //Navigation Properties
 
-        public virtual IQueryable<ReservationViewModel> Reservations { get; set; }
+        public virtual IQueryable<ReservationsViewModel> Reservations { get; set; }
     }
 }
