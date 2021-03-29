@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelReservationsManager.Models.Client
 {
-    public class ClientViewModel :BaseViewModel
+    public class ClientsViewModel :BaseViewModel
     {
         [Required]
         [Display(Name = "Име")]
@@ -19,22 +19,22 @@ namespace HotelReservationsManager.Models.Client
         [MaxLength(10, ErrorMessage = "Моля въведете валиден телефонен номер!")]
         [Required]
         [Display(Name = "Телефонен номер")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [EmailAddress(ErrorMessage = "Моля въведете валиден имейл адрес!")]
         [Required]
         [Display(Name = "Имейл")]
         public string Email { get; set; }
 
-        public IEnumerable<ReservationViewModel> ReservationsViewModels { get; set; }
+        public IEnumerable<ReservationsViewModel> ReservationsViewModels { get; set; }
 
         [Display(Name = "Възрастен")]
-        public bool isAdult { get; set; }
+        public bool IsAdult { get; set; }
 
 
-        public ClientViewModel()
+        public ClientsViewModel()
         {
-            ReservationsViewModels = new HashSet<ReservationViewModel>().AsEnumerable<ReservationViewModel>();
+            ReservationsViewModels = new HashSet<ReservationsViewModel>().AsEnumerable<ReservationsViewModel>();
         }
     }
 }

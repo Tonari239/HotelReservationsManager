@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLibrary.Enumeration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelReservationsManager.Models.Room
 {
-    public class RoomViewModel :BaseViewModel
+    public class RoomsViewModel :BaseViewModel
     {
         [Required]
         [Display(Name = "Номер")]
@@ -19,7 +20,7 @@ namespace HotelReservationsManager.Models.Room
 
         [Required]
         [Display(Name = "Тип стая")]
-        public string Type { get; set; }
+        public RoomTypeEnum Type { get; set; }
 
         
         [Display(Name = "Заета")]
