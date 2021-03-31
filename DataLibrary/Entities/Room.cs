@@ -1,21 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace DataLibrary.Entities
 {
     public class Room
     {
         [Key]
-        public int RoomID { get; set; }
+        public int Id { get; set; }
 
         public int Capacity { get; set; }
 
-        public string Type { get; set; }
+        public int Type { get; set; }
 
-        public bool IsFree { get; set; }
+        private bool isFree;
+
+        public bool IsFree
+        {
+            get { return isFree; }
+            set 
+            {
+               isFree= DateTime.Compare(Reservation.LeaveDate, DateTime.Now) <= 0 ? true : false;
+            }
+        }
+
 
         public decimal BedPriceForAdult { get; set; }
 

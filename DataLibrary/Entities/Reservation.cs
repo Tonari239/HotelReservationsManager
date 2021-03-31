@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace DataLibrary.Entities
 {
     public class Reservation
     {
+
         [Key]
-        public int ReservationId { get; set; }
+        public int Id { get; set; }
 
         public DateTime AccommodationDate { get; set; }
 
