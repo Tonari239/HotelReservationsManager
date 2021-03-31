@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <div class="menu-btn">
+            <span class="menu-btn_burger"></span>
+        </div>
+        <nav class="nav">
+            <ul class="menu-nav">
+                <li class="menu-nav_item">
+                    <a asp-action="Index" asp-area="" asp-controller="Home" class="menu-nav_link">Home</a>
+                </li>
+                <li class="menu-nav_item">
+                    <a asp-action="Contacts" asp-area="" asp-controller="Home" class="menu-nav_link">Contact us</a>
+                </li>
+                <li class="menu-nav_item">
+                    <a asp-action="Rooms" asp-area="" asp-controller="Home" class="menu-nav_link">Rooms</a>
+                </li>
+                <li class="menu-nav_item">
+                    <a asp-action="Reservation" asp-area="" asp-controller="Home" class="menu-nav_link">Reservation</a>
+                </li>
+                <li class="menu-nav_item">
+                    <a asp-action="Login" asp-area="" asp-controller="Home" class="menu-nav_link">Login</a>
+                </li>
+                <li class="menu-nav_item">
+                    <a asp-action="Signup" asp-area="" asp-controller="Home" class="menu-nav_link">SignUp</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="home">
+            @RenderBody()
+        </section>
+    </main>
+    <footer>
+        &copy; Copyright 2021 Atanas Vanina and Strahil
+    </footer>
+
+    <script src="~/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

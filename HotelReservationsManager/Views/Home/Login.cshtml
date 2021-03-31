@@ -1,0 +1,28 @@
+@page   
+ 
+        <section class="home">
+            <div class="center">
+                <h1>LogIn</h1>
+                <form method="post">
+                    <div class="txt_field">
+                        <input type="text" required>
+                        <span></span>
+                        <label> Username</label>
+                    </div>
+                    <div class="txt_field">
+                        <input type="password" required>
+                            <span>  </span>
+                        <label> Password</label>
+                    </div>
+                    <div class="forgot_pass">Forgot Password?</div>
+                    <input type="submit" value="Login" class="submit">
+                    <div class="signup_link">
+                        Not a member? <a asp-action="Signup" asp-area="" asp-controller="Home" asp- > Signup</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+   @section Scripts{ 
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+   }
