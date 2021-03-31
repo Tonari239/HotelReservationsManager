@@ -1,24 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {}
+    "D:\\GitProjects\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {}
   },
   "projects": {
-    "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
+    "D:\\GitProjects\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
+        "projectUniqueName": "D:\\GitProjects\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
         "projectName": "DataLibrary",
-        "projectPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\obj\\",
+        "projectPath": "D:\\GitProjects\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "D:\\GitProjects\\HotelReservationsManager\\DataLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -83,25 +86,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {
+    "D:\\GitProjects\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
+        "projectUniqueName": "D:\\GitProjects\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
         "projectName": "HotelReservationsManager",
-        "projectPath": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "F:\\repos\\HotelReservationsManager\\HotelReservationsManager\\obj\\",
+        "projectPath": "D:\\GitProjects\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "D:\\GitProjects\\HotelReservationsManager\\HotelReservationsManager\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -114,8 +120,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
-                "projectPath": "F:\\repos\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj"
+              "D:\\GitProjects\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj": {
+                "projectPath": "D:\\GitProjects\\HotelReservationsManager\\DataLibrary\\DataLibrary.csproj"
               }
             }
           }
@@ -185,7 +191,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
