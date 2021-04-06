@@ -13,8 +13,6 @@ namespace HotelReservationsManager.Models.Client
 
         public ClientsFilterViewModel Filter { get; set; }
 
-        public ICollection<ClientsViewModel> Items { get; set; }
-
         public IEnumerable<ClientsViewModel> ClientViewModels { get; set; }
 
         public ClientsIndexViewModel()

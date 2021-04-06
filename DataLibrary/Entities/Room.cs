@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLibrary.Enumeration;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DataLibrary.Entities
@@ -10,7 +11,7 @@ namespace DataLibrary.Entities
 
         public int Capacity { get; set; }
 
-        public int Type { get; set; }
+        public RoomTypeEnum Type { get; set; }
 
         private bool isFree;
 

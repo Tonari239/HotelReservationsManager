@@ -13,7 +13,7 @@ namespace HotelReservationsManager.Models.Room
 
         public RoomsFilterViewModel Filter { get; set; }
 
-        public ICollection<RoomsViewModel> Items { get; set; }
+        
 
         public IEnumerable<RoomsViewModel> RoomViewModels { get; set; }
         public RoomsIndexViewModel()

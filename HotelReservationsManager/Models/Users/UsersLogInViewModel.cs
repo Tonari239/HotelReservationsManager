@@ -14,6 +14,5 @@ namespace HotelReservationsManager.Models.Users
         [Required]
         public string Password { get; set; }
 
-        public string Message { get; set; }
     }
 }

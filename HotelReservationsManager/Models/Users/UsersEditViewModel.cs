@@ -49,6 +49,5 @@ namespace HotelReservationsManager.Models.Users
 
         public DateTime? LeavingDate { get; set; }
 
-        public string Message { get; set; }
     }
 }

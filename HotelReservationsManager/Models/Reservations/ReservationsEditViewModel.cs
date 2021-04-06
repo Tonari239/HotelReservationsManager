@@ -23,12 +23,12 @@ namespace HotelReservationsManager.Models.Reservations
         public DateTime LeaveDate { get; set; }
 
         [Required]
-        public bool IsBreakfastIncluded { get; set; }
+        public bool BreakfastIncluded { get; set; }
 
         [Required]
-        public bool IsAllInclusive { get; set; }
+        public bool AllInclusive { get; set; }
 
-        public decimal OverallBill { get; set; }
+        public decimal Cost { get; set; }
 
         public string Message { get; set; }
 

@@ -21,18 +21,18 @@ namespace HotelReservationsManager.Models.Reservations
         public DateTime LeaveDate { get; set; } = DateTime.UtcNow;
 
 
-        public bool IsBreakfastIncluded { get; set; }
-        public bool IsAllInclusive { get; set; }
-        public decimal OverallBill { get; set; }
+        public bool BreakfastIncluded { get; set; }
+        public bool AllInclusive { get; set; }
+        public decimal Cost { get; set; }
 
 
 
         public int RoomId { get; set; }
         public int UserId { get; set; }
 
-        public IEnumerable<SelectListItem> Rooms { get; set; }
+        //public IEnumerable<SelectListItem> Rooms { get; set; } ? nz kvo e tva
 
-        public IEnumerable<SelectListItem> Users { get; set; }
+        //public IEnumerable<SelectListItem> Users { get; set; }  ? nz kvo e tva
 
         public string Message { get; set; }
 

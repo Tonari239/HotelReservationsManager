@@ -22,14 +22,14 @@ namespace HotelReservationsManager.Models.Rooms
         public bool IsFree { get; set; }
 
         [Required]
-        public decimal PriceAdult { get; set; }
+        public decimal BedPriceForAdult { get; set; }
 
         [Required]
-        public decimal PriceChild { get; set; }
+        public decimal BedPriceForChild { get; set; }
 
         [Required]
         public RoomTypeEnum RoomType { get; set; }
 
-        public string Message { get; set; }
+        
     }
 }

@@ -10,7 +10,6 @@ namespace HotelReservationsManager.Models.Reservation
     {
         public PagerViewModel Pager { get; set; }
 
-        public ICollection<ReservationsViewModel> Items { get; set; }
 
         public IEnumerable<ReservationsViewModel> ReservationViewModels { get; set; }
 
