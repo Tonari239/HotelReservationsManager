@@ -1,0 +1,57 @@
+﻿@model HotelReservationsManager.Models.Room.RoomViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="center_view">
+    <h1>Edit Room</h1>
+    <form asp-controller="Rooms" asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="txt_field">
+            <label asp-for="Capacity" ></label>
+            <input asp-for="Capacity" required type="text" />
+            <span asp-validation-for="Capacity"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Type" required type="text" />
+            <span asp-validation-for="Type"></span>
+            <label asp-for="Type"></label>
+
+        </div>
+        <div class="txt_field">
+            <span></span>
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="IsFree" /> @Html.DisplayNameFor(model => model.IsFree)
+            </label>
+        </div>
+        <div class="txt_field">
+            <label asp-for="BedPriceForAdult" ></label>
+            <input asp-for="BedPriceForAdult"required type="text" />
+            <span asp-validation-for="BedPriceForAdult" ></span>
+        </div>
+        <div class="txt_field">
+            <input asp-for="BedPriceForKid" required type="text" />
+            <span asp-validation-for="BedPriceForKid"></span>
+            <label asp-for="BedPriceForKid"></label>
+
+        </div>
+        <div class="txt_field">
+            <input asp-for="Number" required type="text" />
+            <span asp-validation-for="Number"></span>
+            <label asp-for="Number"></label>
+
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="submit" />
+        </div>
+    </form>
+    <div class="signup_link">
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

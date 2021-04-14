@@ -1,4 +1,4 @@
-﻿using DataLibrary.Enumeration;
+﻿using DataLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,34 +7,33 @@ using System.Threading.Tasks;
 
 namespace HotelReservationsManager.Models.Room
 {
-    public class RoomsViewModel :BaseViewModel
+    public class RoomViewModel :BaseViewModel
     {
         [Required]
-        [Display(Name = "Номер")]
+        [Display(Name = "Number")]
         public int Number { get; set; }
 
         [Required]
-        [Range(1,4)]
-        [Display(Name ="Капацитет")]
+        [Range(1, 4)]
+        [Display(Name = "Capacity")]
         public int Capacity { get; set; }
 
         [Required]
-        [Display(Name = "Тип стая")]
+        [Display(Name = "Room type")]
         public RoomTypeEnum Type { get; set; }
 
-        
-        [Display(Name = "Заета")]
+
+        [Display(Name = "Occupied")]
         public bool IsFree { get; set; }
 
         [Required]
-        [Display(Name = "Цена на легло за възрастен")]
+        [Display(Name = "Bed price for adult")]
         public decimal BedPriceForAdult { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Моля въведете позитивно число!")]
-        [Display(Name = "Цена на легло за дете")]
+        [Display(Name = "Bed price for kids")]
         public decimal BedPriceForKid { get; set; }
-
-
+        
     }
 }
