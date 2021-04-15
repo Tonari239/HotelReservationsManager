@@ -58,12 +58,12 @@ namespace DataLibrary.Repositories
             return _dbSet.Count(expression);
          }
 
-        public IQueryable Get(Expression<Func<T,bool>> expression)
+        public IQueryable<T> Get(Expression<Func<T,bool>> expression)
         {
             return _dbSet.Where(expression).AsQueryable();
         }
 
-        public IQueryable GetAll()
+        public IQueryable<T> GetAll()
         {
             return _dbSet.AsQueryable();
         }
@@ -77,7 +77,7 @@ namespace DataLibrary.Repositories
            return _dbSet.Find(id);
         }
 
-        public IQueryable OrderBy(Func<T,bool> expression)
+        public IQueryable<T> OrderBy(Func<T,bool> expression)
         {
             return _dbSet.OrderBy(expression).AsQueryable();
         }
