@@ -1,0 +1,56 @@
+﻿@model HotelReservationsManager.Models.Reservation.ReservationViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="center_view">
+
+    <h1>Create Reservation</h1>
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="txt_field">
+            <input asp-for="RoomViewModel.Id" required type="text" />
+            <span asp-validation-for="RoomViewModel.Id"></span>
+            <label asp-for="RoomViewModel.Id"></label>
+        </div>
+        <div class="txt_field">
+            <input asp-for="ClientsViewModels" required type="text" />
+            <span asp-validation-for="ClientsViewModels"></span>
+            <label asp-for="ClientsViewModels"></label>
+        </div>
+        <div class="txt_field">
+            <input asp-for="AccommodationDate" required type="text" />
+            <span asp-validation-for="AccommodationDate"></span>
+            <label asp-for="AccommodationDate" class="control-label"></label>
+        </div>
+        <div class="txt_field">
+            <input asp-for="LeaveDate" required type="text" />
+            <span asp-validation-for="LeaveDate"></span>
+            <label asp-for="LeaveDate"></label>
+        </div>
+        <div class="txt_field">
+
+
+            <input class="form-check-input" asp-for="BreakfastIncluded" /> @Html.DisplayNameFor(model => model.BreakfastIncluded)
+            <span></span>
+        </div>
+        <div class="txt_field">
+
+            <input class="form-check-input" asp-for="AllInclusive" /> @Html.DisplayNameFor(model => model.AllInclusive)
+            <span></span>
+            <label></label>
+        </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+
+    <div class="back_link">
+        <a asp-action="Index">Back</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
