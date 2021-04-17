@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream:HotelReservationsManager/Models/Rooms/RoomsViewModel.cs
 ﻿using DataLibrary.Enumeration;
+=======
+﻿using DataLibrary;
+using HotelReservationsManager.Models.Reservation;
+>>>>>>> Stashed changes:HotelReservationsManager/Models/Room/RoomViewModel.cs
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,7 +39,11 @@ namespace HotelReservationsManager.Models.Room
         [Range(1, int.MaxValue, ErrorMessage = "Моля въведете позитивно число!")]
         [Display(Name = "Цена на легло за дете")]
         public decimal BedPriceForKid { get; set; }
+<<<<<<< Updated upstream:HotelReservationsManager/Models/Rooms/RoomsViewModel.cs
 
+=======
+        public int ReservationId { get; set; }
+>>>>>>> Stashed changes:HotelReservationsManager/Models/Room/RoomViewModel.cs
 
     }
 }

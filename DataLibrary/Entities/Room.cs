@@ -1,6 +1,13 @@
+<<<<<<< Updated upstream
 ﻿using DataLibrary.Enumeration;
 using System;
+=======
+﻿using System;
+using System.Collections.Generic;
+>>>>>>> Stashed changes
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace DataLibrary.Entities
 {
@@ -12,6 +19,7 @@ namespace DataLibrary.Entities
         public int Capacity { get; set; }
 
         public RoomTypeEnum Type { get; set; }
+<<<<<<< Updated upstream
 
         private bool isFree;
 
@@ -23,7 +31,10 @@ namespace DataLibrary.Entities
                isFree= DateTime.Compare(Reservation.LeaveDate, DateTime.Now) <= 0 ? true : false;
             }
         }
+=======
+>>>>>>> Stashed changes
 
+        public bool IsFree { get; set; }
 
         public decimal BedPriceForAdult { get; set; }
 
@@ -32,6 +43,7 @@ namespace DataLibrary.Entities
         public int Number { get; set; }
 
         //Navigation Properties
+        public int ReservationId { get; set; }
         public virtual Reservation Reservation { get; set; }
 
     }

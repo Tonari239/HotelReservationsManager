@@ -15,8 +15,8 @@ namespace DataLibrary.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DataLibrary.Entities.Client", b =>
@@ -84,7 +84,8 @@ namespace DataLibrary.Migrations
                     b.HasIndex("RoomId")
                         .IsUnique();
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Reservations");
                 });
@@ -169,8 +170,6 @@ namespace DataLibrary.Migrations
                     b.HasOne("DataLibrary.Entities.Reservation", "Reservation")
                         .WithMany("Clients")
                         .HasForeignKey("ReservationId");
-
-                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("DataLibrary.Entities.Reservation", b =>
@@ -182,29 +181,10 @@ namespace DataLibrary.Migrations
                         .IsRequired();
 
                     b.HasOne("DataLibrary.Entities.User", "User")
-                        .WithMany("Reservations")
-                        .HasForeignKey("UserId")
+                        .WithOne("Reservation")
+                        .HasForeignKey("DataLibrary.Entities.Reservation", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Room");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DataLibrary.Entities.Reservation", b =>
-                {
-                    b.Navigation("Clients");
-                });
-
-            modelBuilder.Entity("DataLibrary.Entities.Room", b =>
-                {
-                    b.Navigation("Reservation");
-                });
-
-            modelBuilder.Entity("DataLibrary.Entities.User", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

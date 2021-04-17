@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace DataLibrary.Entities
 {
     public class Reservation
     {
-
         [Key]
         public int Id { get; set; }
 
@@ -23,6 +24,7 @@ namespace DataLibrary.Entities
 
         //Navigation properties
         public virtual Room Room { get; set; } // booked room
+        [ForeignKey("RoomId")]
         public int RoomId { get; set; }
         public virtual User User { get; set; }
         public int UserId { get; set; }
