@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0aX/pNSe0w0yJ6mqhmZ3kkC7ggVkGems14uzPcNIhveF06wD2WX8IUtzlMq7Zct+ELJQltQSZbPAb5yOyR6Bmw==",
+  "dgSpecHash": "JWGk0Vk8NIBQjjmwKAkB5PHtlvAvyqdtCLbJusI/Yo2at+Bo65A9dYKahDdVKUhB6liRv3ioHo6KYo7DJxHulQ==",
   "success": true,
-  "projectFilePath": "D:\\Downloads\\HotelReservationsManager-master\\HotelReservationsManager\\HotelReservationsManager.csproj",
+  "projectFilePath": "D:\\HotelReservationsManager\\HotelReservationsManager\\HotelReservationsManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\werbe\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\werbe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

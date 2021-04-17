@@ -8,20 +8,42 @@ using DataLibrary;
 using DataLibrary.Entities;
 using HotelReservationsManager.Models;
 using HotelReservationsManager.Models.Room;
+<<<<<<< Updated upstream
 using HotelReservationsManager.Models.Shared;
 using DataLibrary.Enumeration;
 using HotelReservationsManager.Models.Rooms;
 using HotelReservationsManager.Models.Validation;
 using HotelReservationsManager.Models.Filters;
+=======
+using HotelReservationsManager.Models.Validation;
+>>>>>>> Stashed changes
 
 namespace HotelReservationsManager.Controllers
 {
     public class RoomsController : Controller
     {
         private readonly int PageSize = GlobalVar.AmountOfElementsDisplayedPerPage;
+<<<<<<< Updated upstream
         private readonly HotelDbContext _context;
 
         public RoomsController()
+=======
+
+        private readonly HotelDbContext _context;
+        private readonly RoomCRUDRepository _repo;
+        private readonly ReservationCRUDRepository _reservationRepo;
+        RoomIndexViewModel _roomIndexViewModels = new RoomIndexViewModel();
+        public IActionResult ChangePageSize(int id)
+        {
+            if (id > 0)
+            {
+                GlobalVar.AmountOfElementsDisplayedPerPage = id;
+            }
+
+            return RedirectToAction("Index");
+        }
+        public RoomsController(HotelDbContext context)
+>>>>>>> Stashed changes
         {
             _context = new HotelDbContext();
         }
@@ -83,6 +105,41 @@ namespace HotelReservationsManager.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(RoomsCreateViewModel createModel)
         {
+<<<<<<< Updated upstream
+=======
+            if (!ModelState.IsValid)
+            {
+                return View(roomVM);
+            }
+            try
+            {
+                Validate(new Validation_Room()
+                {
+                    Capacity = roomVM.Capacity,
+                    Number = roomVM.Number
+                });
+            }
+            catch (InvalidOperationException e)
+            {
+                return View(roomVM);
+            }
+
+            Room room = new Room()
+            {
+                
+                Id = roomVM.Id,
+                BedPriceForAdult = roomVM.BedPriceForAdult,
+                BedPriceForKid = roomVM.BedPriceForKid,
+                Capacity = roomVM.Capacity,
+                IsFree = true,
+                Number = roomVM.Number,
+                Type = roomVM.Type,
+                Reservation=_context.Reservations.FirstOrDefault(x=>x.RoomId==roomVM.Id)
+                
+            };
+            _repo.Add(room);
+            return  RedirectToAction("Index", "Rooms");
+>>>>>>> Stashed changes
 
             if (GlobalVar.LoggedOnUserRights != GlobalVar.UserRights.Admininstrator)
             {
@@ -170,6 +227,18 @@ namespace HotelReservationsManager.Controllers
             {
                 return RedirectToAction("LogInPermissionDenied", "Users");
             }
+            try
+            {
+                Validate(new Validation_Room()
+                {
+                    Capacity = vm.Capacity,
+                    Number = vm.Number
+                });
+            }
+            catch (InvalidOperationException e)
+            {
+                return View(vm);
+            }
 
             if (ModelState.IsValid)
             {
@@ -255,7 +324,20 @@ namespace HotelReservationsManager.Controllers
             }
 
         }
+        private void Validate(Validation_Room model)
+        {
 
+            if (model.Number <= 0)
+            {
+                throw new InvalidOperationException("Room number must be positive integer");
+            }
+
+            if (model.Capacity <= 0)
+            {
+                throw new InvalidOperationException("Room capacity must be positive integer");
+            }
+
+        }
         private bool RoomExists(int id)
         {
             return _context.Rooms.Any(e => e.Id == id);
