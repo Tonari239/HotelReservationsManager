@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelReservationsManager.Models.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ namespace HotelReservationsManager.Models.Client
 {
     public class ClientIndexViewModel
     {
+        public PagerViewModel Pager { get; set; }
+
         public IQueryable<ClientViewModel> Items { get; set; }
         public ClientIndexViewModel()
         {

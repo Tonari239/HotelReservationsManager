@@ -2,6 +2,8 @@
 using DataLibrary.Entities;
 using DataLibrary.Repositories;
 using HotelReservationsManager.Models.Client;
+using HotelReservationsManager.Models.Filters;
+using HotelReservationsManager.Models.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,11 +15,22 @@ namespace HotelReservationsManager.Controllers
 {
     public class ClientsController : Controller
     {
+        private readonly int PageSize = GlobalVar.AmountOfElementsDisplayedPerPage;
+
         private readonly HotelDbContext _context;
         private readonly ClientCRUDRepository _repo;
         private readonly ReservationCRUDRepository _reservationRepo;
         ClientIndexViewModel _clientIndexViewModels = new ClientIndexViewModel();
+        public IActionResult ChangePageSize(int id)
+        {
+            if (id > 0)
+            {
+                GlobalVar.AmountOfElementsDisplayedPerPage = id;
+            }
 
+            return RedirectToAction("Index");
+
+        }
         public ClientsController(HotelDbContext context)
         {
             _context = context;
@@ -38,6 +51,11 @@ namespace HotelReservationsManager.Controllers
         // GET: Clients
         public IActionResult Index()
         {
+            _clientIndexViewModels.Pager ??= new PagerViewModel();
+            _clientIndexViewModels.Pager.CurrentPage = _clientIndexViewModels.Pager.CurrentPage <= 0 ? 1 : _clientIndexViewModels.Pager.CurrentPage;
+
+            var contextDb = Filter(_context.Clients.ToList(), _clientIndexViewModels.Filter);
+            _clientIndexViewModels.Pager.PagesCount = Math.Max(1, (int)Math.Ceiling(contextDb.Count() / (double)PageSize));
             return View("Index",_clientIndexViewModels);
         }
 
@@ -168,6 +186,23 @@ namespace HotelReservationsManager.Controllers
         private bool ClientExists(int id)
         {
             return _context.Clients.Any(e => e.Id == id);
+        }
+        private List<Client> Filter(List<Client> collection, ClientsFilterViewModel filterModel)
+        {
+
+            if (filterModel != null)
+            {
+                if (filterModel.FirstName != null)
+                {
+                    collection = collection.Where(x => x.FirstName.Contains(filterModel.FirstName)).ToList();
+                }
+                if (filterModel.LastName != null)
+                {
+                    collection = collection.Where(x => x.LastName.Contains(filterModel.LastName)).ToList();
+                }
+            }
+
+            return collection;
         }
     }
 }

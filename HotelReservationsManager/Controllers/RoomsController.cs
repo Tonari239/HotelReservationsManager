@@ -10,6 +10,8 @@ using DataLibrary.Entities;
 using DataLibrary.Repositories;
 using HotelReservationsManager.Models.Room;
 using HotelReservationsManager.Models.Validation;
+using HotelReservationsManager.Models.Shared;
+using HotelReservationsManager.Models.Filters;
 
 namespace HotelReservationsManager.Controllers
 {
@@ -52,8 +54,15 @@ namespace HotelReservationsManager.Controllers
         // GET: Rooms
         public IActionResult Index()
         {
+            _roomIndexViewModels.Pager ??= new PagerViewModel();
+            _roomIndexViewModels.Pager.CurrentPage = _roomIndexViewModels.Pager.CurrentPage <= 0 ? 1 : _roomIndexViewModels.Pager.CurrentPage;
+            var contextDb = Filter(_context.Rooms.ToList(), _roomIndexViewModels.Filter);
+
+            _roomIndexViewModels.Pager.PagesCount = Math.Max(1, (int)Math.Ceiling(contextDb.Count() / (double)PageSize));
+
             return View("Index",_roomIndexViewModels);
         }
+
 
         // GET: Rooms/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -217,6 +226,28 @@ namespace HotelReservationsManager.Controllers
                 throw new InvalidOperationException("Room capacity must be positive integer");
             }
 
+        }
+        private List<Room> Filter(List<Room> collection, RoomsFilterViewModel filterModel)
+        {
+
+            if (filterModel != null)
+            {
+                if (filterModel.Capacity != null)
+                {
+                    collection = collection.Where(x => x.Capacity == filterModel.Capacity).ToList();
+                }
+                if (filterModel.Type != null)
+                {
+                    collection = collection.Where(x => x.Type == filterModel.Type).ToList();
+                }
+                if (filterModel.IsFree != null)
+                {
+                    collection = collection.Where(x => x.IsFree == filterModel.IsFree).ToList();
+                }
+
+            }
+
+            return collection;
         }
         private bool RoomExists(int id)
         {

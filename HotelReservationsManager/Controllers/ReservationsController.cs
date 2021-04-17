@@ -14,6 +14,7 @@ using HotelReservationsManager.Models.Room;
 using HotelReservationsManager.Models.Client;
 using DataLibrary.Repositories;
 using HotelReservationsManager.Models.Validation;
+using HotelReservationsManager.Models.Shared;
 
 namespace HotelReservationsManager.Controllers
 {
@@ -81,7 +82,10 @@ namespace HotelReservationsManager.Controllers
         }
         public IActionResult Index()
         {
-            /* List<Reservation> reservations = _context.Reservations.ToList();
+            _reservationIndexViewModels.Pager ??= new PagerViewModel();
+            _reservationIndexViewModels.Pager.CurrentPage = _reservationIndexViewModels.Pager.CurrentPage <= 0 ? 1 : _reservationIndexViewModels.Pager.CurrentPage;
+
+            /*List<Reservation> reservations = _context.Reservations.ToList();
              List<ReservationViewModel> list = new List<ReservationViewModel>();
 
              foreach (var reservation in reservations)
@@ -123,6 +127,7 @@ namespace HotelReservationsManager.Controllers
 
              }
             */
+            _reservationIndexViewModels.Pager.PagesCount = Math.Max(1, (int)Math.Ceiling(_context.Reservations.Count() / (double)PageSize));
             return View("Index", _reservationIndexViewModels);
         }
         // GET: Reservations/Create
@@ -183,6 +188,7 @@ namespace HotelReservationsManager.Controllers
 
             _reservationRepo.Add(reservation);
             return RedirectToAction(nameof(Index));
+
         }
 
     
