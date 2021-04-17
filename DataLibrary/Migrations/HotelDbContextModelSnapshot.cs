@@ -38,10 +38,10 @@ namespace DataLibrary.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("ReservationId")
+                    b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -84,8 +84,7 @@ namespace DataLibrary.Migrations
                     b.HasIndex("RoomId")
                         .IsUnique();
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -112,6 +111,9 @@ namespace DataLibrary.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -127,8 +129,8 @@ namespace DataLibrary.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CivilNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CivilNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -145,14 +147,14 @@ namespace DataLibrary.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LeavingDate")
+                    b.Property<DateTime>("LeavingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("SecondName")
                         .HasColumnType("nvarchar(max)");
@@ -169,7 +171,9 @@ namespace DataLibrary.Migrations
                 {
                     b.HasOne("DataLibrary.Entities.Reservation", "Reservation")
                         .WithMany("Clients")
-                        .HasForeignKey("ReservationId");
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataLibrary.Entities.Reservation", b =>
@@ -181,8 +185,8 @@ namespace DataLibrary.Migrations
                         .IsRequired();
 
                     b.HasOne("DataLibrary.Entities.User", "User")
-                        .WithOne("Reservation")
-                        .HasForeignKey("DataLibrary.Entities.Reservation", "UserId")
+                        .WithMany("Reservations")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

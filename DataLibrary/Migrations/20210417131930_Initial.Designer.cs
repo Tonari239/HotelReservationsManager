@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLibrary.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20210415201236_Initial")]
+    [Migration("20210417131930_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace DataLibrary.Migrations
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReservationId")
+                    b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -86,8 +86,7 @@ namespace DataLibrary.Migrations
                     b.HasIndex("RoomId")
                         .IsUnique();
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -112,6 +111,9 @@ namespace DataLibrary.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
                     b.Property<int>("Type")
@@ -171,7 +173,9 @@ namespace DataLibrary.Migrations
                 {
                     b.HasOne("DataLibrary.Entities.Reservation", "Reservation")
                         .WithMany("Clients")
-                        .HasForeignKey("ReservationId");
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataLibrary.Entities.Reservation", b =>
@@ -183,8 +187,8 @@ namespace DataLibrary.Migrations
                         .IsRequired();
 
                     b.HasOne("DataLibrary.Entities.User", "User")
-                        .WithOne("Reservation")
-                        .HasForeignKey("DataLibrary.Entities.Reservation", "UserId")
+                        .WithMany("Reservations")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -1,0 +1,61 @@
+﻿@model HotelReservationsManager.Models.Room.RoomViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="center_view">
+
+    <h1>Create Room</h1>
+    <hr />
+            <form asp-action="Create" asp-controller="Rooms" method="post">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="txt_field">
+                    <input asp-for="Capacity" required type="text" />
+                    <span asp-validation-for="Capacity"></span>
+                    <label asp-for="Capacity"></label>
+                </div>
+                <div class="txt_field">
+                    <select asp-for="Type">
+                        <option value="Apartment">Apartment</option>
+                        <option value="SingleBed">Single bed</option>
+                        <option value="DoubleBed">Double bed</option>
+                        <option value="Penthouse">Penthouse</option>
+                        <option value="Maisonette">Maisonette</option>
+                    </select>
+                    <span asp-validation-for="Type"></span>
+                    <label asp-for="Type" class="control-label"></label>
+                </div>
+                
+                <div class="txt_field">
+                    <input asp-for="BedPriceForAdult" required type="text" />
+                    <span asp-validation-for="BedPriceForAdult"></span>
+                    <label asp-for="BedPriceForAdult" ></label>
+                </div>
+                <div class="txt_field">
+                    <input asp-for="BedPriceForKid" required type="text" />
+                    <span asp-validation-for="BedPriceForKid"></span>
+                    <label asp-for="BedPriceForKid" class="control-label"></label>
+                </div>
+                <div class="txt_field">
+                    <input asp-for="Number" required type="text" />
+                    <span asp-validation-for="Number"></span>
+                    <label asp-for="Number" c></label>
+
+                </div>
+                <div>
+                    <input type="submit" value="Create" class="submit" />
+                    <span>
+                    </span>
+                </div>
+                
+            </form>
+            <div class="back_link">
+                <a asp-action="Index" >Back</a>
+            </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
