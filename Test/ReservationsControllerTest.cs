@@ -1,4 +1,4 @@
-using DataLibrary;
+﻿using DataLibrary;
 using DataLibrary.Entities;
 using DataLibrary.Repositories;
 using HotelReservationsManager.Controllers;
@@ -15,17 +15,17 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    public class RoomsControllerTest
+    public class ReservationsControllerTest
     {
         private HotelDbContext _context;
-        private RoomsController _controller;
+        private ReservationsController _controller;
 
         [SetUp]
         public void Setup()
         {
 
             _context = new HotelDbContext();
-            _controller = new RoomsController(_context);
+            _controller = new ReservationsController(_context);
 
         }
 
@@ -62,19 +62,8 @@ namespace Test
         }
 
 
-        [Test]
-        public void Details_RedirectsWhenIdDataIsIncorrect()
-        {
-            var result = _controller.Details(-1) as NotFoundResult;
-            Assert.AreEqual(404, result.StatusCode);
-        }
 
-        [Test]
-        public void Details_ReturnsCorrectView()
-        {
-            ViewResult result = _controller.Details(1) as ViewResult;
-            Assert.AreEqual("Details", result.ViewName);
-        }
+        
 
 
 

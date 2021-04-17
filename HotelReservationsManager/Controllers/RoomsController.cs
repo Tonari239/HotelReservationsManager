@@ -14,6 +14,7 @@ namespace HotelReservationsManager.Controllers
 {
     public class RoomsController : Controller
     {
+        private readonly int PageSize = GlobalVar.AmountOfElementsDisplayedPerPage;
         private readonly HotelDbContext _context;
         private readonly RoomCRUDRepository _repo;
         private readonly ReservationCRUDRepository _reservationRepo;
@@ -45,21 +46,21 @@ namespace HotelReservationsManager.Controllers
         }
 
         // GET: Rooms/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null)
+            if (id == null || id<=0)
             {
                 return NotFound();
             }
 
-            var RoomViewModel = await _roomIndexViewModels.Items
+            var RoomViewModel =  _roomIndexViewModels.Items
                 .FirstOrDefaultAsync(vm => vm.Id == id);
             if (RoomViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(RoomViewModel);
+            return View("Details",RoomViewModel);
         }
 
         // GET: Rooms/Create
@@ -173,5 +174,7 @@ namespace HotelReservationsManager.Controllers
         {
             return _context.Rooms.Any(e => e.Id == id);
         }
+
+        
     }
 }

@@ -2,6 +2,8 @@
 using DataLibrary.Entities;
 using DataLibrary.Repositories;
 using HotelReservationsManager.Models.Client;
+using HotelReservationsManager.Models.Filters;
+using HotelReservationsManager.Models.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,6 +15,7 @@ namespace HotelReservationsManager.Controllers
 {
     public class ClientsController : Controller
     {
+        private readonly int PageSize = GlobalVar.AmountOfElementsDisplayedPerPage;
         private readonly HotelDbContext _context;
         private readonly ClientCRUDRepository _repo;
         private readonly ReservationCRUDRepository _reservationRepo;
@@ -31,38 +34,43 @@ namespace HotelReservationsManager.Controllers
                 IsAdult = x.IsAdult,
                 LastName = x.LastName,
                 PhoneNumber = x.PhoneNumber,
-                ReservationId=x.ReservationId
+                ReservationId = x.ReservationId
             }); ;
         }
 
         // GET: Clients
         public IActionResult Index()
         {
-            return View("Index",_clientIndexViewModels);
+            _clientIndexViewModels.Pager ??= new PagerViewModel();
+            _clientIndexViewModels.Pager.CurrentPage = _clientIndexViewModels.Pager.CurrentPage <= 0 ? 1 : _clientIndexViewModels.Pager.CurrentPage;
+
+            var contextDb = Filter(_context.Clients.ToList(), _clientIndexViewModels.Filter);
+            _clientIndexViewModels.Pager.PagesCount = Math.Max(1, (int)Math.Ceiling(contextDb.Count() / (double)PageSize));
+            return View("Index", _clientIndexViewModels);
         }
 
         // GET: Clients/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
-            if (id == null)
+            if (id == null || id <= 0)
             {
                 return NotFound();
             }
 
-            var ClientViewModel = await _clientIndexViewModels.Items
+            var ClientViewModel = _clientIndexViewModels.Items
                 .FirstOrDefaultAsync(vm => vm.Id == id);
             if (ClientViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(ClientViewModel);
+            return View("Details", ClientViewModel);
         }
 
         // GET: Clients/Create
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Clients/Create
@@ -86,7 +94,7 @@ namespace HotelReservationsManager.Controllers
                 LastName = clientVM.FirstName,
                 PhoneNumber = clientVM.PhoneNumber,
                 Reservation = _reservationRepo.GetById(clientVM.ReservationId),
-                ReservationId=clientVM.ReservationId
+                ReservationId = clientVM.ReservationId
             };
             _repo.Add(Client);
             return RedirectToAction("Index", "Clients");
@@ -96,19 +104,19 @@ namespace HotelReservationsManager.Controllers
         // GET: Clients/Edit/5
         public IActionResult Edit(int? id)
         {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-            ClientViewModel clientVM = _clientIndexViewModels.Items.FirstOrDefault(x => x.Id == id);
-            
-                if (clientVM == null)
-                {
-                    return NotFound();
-                }
-                return View(clientVM);
+            if (id == null || id <= 0)
+            {
+                return NotFound();
             }
-        
+            ClientViewModel clientVM = _clientIndexViewModels.Items.FirstOrDefault(x => x.Id == id);
+
+            if (clientVM == null)
+            {
+                return NotFound();
+            }
+            return View("Edit", clientVM);
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -128,8 +136,8 @@ namespace HotelReservationsManager.Controllers
             client.PhoneNumber = vm.PhoneNumber;
             client.Reservation = _reservationRepo.GetById(vm.ReservationId);
             client.ReservationId = vm.ReservationId;
-            
-            
+
+
             //TODO: ADD THIS client.Reservation=vm.Reservation but with View model
 
 
@@ -141,7 +149,7 @@ namespace HotelReservationsManager.Controllers
         // GET: Clients/Delete/5
         public IActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id == null || id <= 0)
             {
                 return NotFound();
             }
@@ -152,7 +160,7 @@ namespace HotelReservationsManager.Controllers
                 return NotFound();
             }
 
-            return View(ClientVM);
+            return View("Delete", ClientVM);
         }
 
         // POST: Clients/Delete/5
@@ -168,6 +176,23 @@ namespace HotelReservationsManager.Controllers
         private bool ClientExists(int id)
         {
             return _context.Clients.Any(e => e.Id == id);
+        }
+
+        private List<Client> Filter(List<Client> collection, ClientsFilterViewModel filterModel)
+        {
+            if (filterModel != null)
+            {
+                if (filterModel.FirstName != null)
+                {
+                    collection = collection.Where(x => x.FirstName.Contains(filterModel.FirstName)).ToList();
+                }
+                if (filterModel.LastName != null)
+                {
+                    collection = collection.Where(x => x.LastName.Contains(filterModel.LastName)).ToList();
+                }
+
+            }
+            return collection;
         }
     }
 }
