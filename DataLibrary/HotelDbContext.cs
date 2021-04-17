@@ -13,9 +13,7 @@ namespace DataLibrary
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<User> Users { get; set; }
-<<<<<<< Updated upstream
-        
-=======
+
 
         public HotelDbContext(DbContextOptions<HotelDbContext> options) :base(options)
         {
@@ -26,7 +24,6 @@ namespace DataLibrary
 
         }
 
->>>>>>> Stashed changes
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies();

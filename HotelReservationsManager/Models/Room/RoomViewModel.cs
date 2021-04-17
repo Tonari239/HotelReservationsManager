@@ -37,9 +37,6 @@ namespace HotelReservationsManager.Models.Room
         public decimal BedPriceForKid { get; set; }
         public int ReservationId { get; set; }
 
-        public static class EnumExtensions
-        {
-            
-        }
+
     }
 }

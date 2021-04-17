@@ -18,7 +18,8 @@ namespace DataLibrary.Migrations
                     IsFree = table.Column<bool>(nullable: false),
                     BedPriceForAdult = table.Column<decimal>(nullable: false),
                     BedPriceForKid = table.Column<decimal>(nullable: false),
-                    Number = table.Column<int>(nullable: false)
+                    Number = table.Column<int>(nullable: false),
+                    ReservationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +91,7 @@ namespace DataLibrary.Migrations
                     PhoneNumber = table.Column<int>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     IsAdult = table.Column<bool>(nullable: false),
-                    ReservationId = table.Column<int>(nullable: true)
+                    ReservationId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,7 +101,7 @@ namespace DataLibrary.Migrations
                         column: x => x.ReservationId,
                         principalTable: "Reservations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -117,8 +118,7 @@ namespace DataLibrary.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_UserId",
                 table: "Reservations",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

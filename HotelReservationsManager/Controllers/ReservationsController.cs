@@ -39,9 +39,10 @@ namespace HotelReservationsManager.Controllers
                 IsFree = x.IsFree,
                 Number = x.Number,
                 Type = x.Type,
-                ReservationId=x.ReservationId
-                
-                
+                ReservationId = x.ReservationId
+
+
+
             });
             _reservationIndexViewModels.Items = _reservationRepo.GetAll().Select(x => new ReservationViewModel()
             {

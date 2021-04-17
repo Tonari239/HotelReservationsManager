@@ -24,7 +24,6 @@ namespace DataLibrary.Entities
 
         //Navigation properties
         public virtual Room Room { get; set; } // booked room
-        [ForeignKey("RoomId")]
         public int RoomId { get; set; }
         public virtual User User { get; set; }
         public int UserId { get; set; }

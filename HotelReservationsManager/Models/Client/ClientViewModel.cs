@@ -1,5 +1,4 @@
 ﻿using DataLibrary.Entities;
-using HotelReservationsManager.Models.Reservation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +28,7 @@ namespace HotelReservationsManager.Models.Client
         public string Email { get; set; }
 
         public int ReservationId { get; set; }
+
 
         [Display(Name = "Възрастен")]
         public bool IsAdult { get; set; }

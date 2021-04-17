@@ -33,7 +33,6 @@ namespace DataLibrary.Entities
 
         //Navigation Properties
         
-      //TODO: MAKE A COLLECTION  
         public virtual ICollection<Reservation> Reservations { get; set; }
         public User()
         {

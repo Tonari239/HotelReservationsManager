@@ -19,18 +19,22 @@
                 <li class="menu-nav_item">
                     <a asp-action="Index" asp-area="" asp-controller="Home" class="menu-nav_link">Home</a>
                 </li>
+                @if (User.IsInRole("Admin"))
+                {
+                   <li class="menu-nav_item">
+                       <a asp-action="Index" asp-area="" asp-controller="Clients" class=" menu-nav_link">Clients</a>
+                   </li>
+                }
                 <li class="menu-nav_item">
                     <a asp-action="Contacts" asp-area="" asp-controller="Home" class="menu-nav_link">Contact us</a>
                 </li>
                 <li class="menu-nav_item">
-                    <a asp-action="Rooms" asp-area="" asp-controller="Home" class="menu-nav_link">Rooms</a>
+                    <a asp-action="Index" asp-area="" asp-controller="Rooms" class="menu-nav_link">Rooms</a>
                 </li>
                 <li class="menu-nav_item">
-<<<<<<< Updated upstream
-                    <a asp-action="Reservation" asp-area="" asp-controller="Home" class="menu-nav_link">Reservation</a>
-=======
+
                     <a asp-action="Index" asp-area="" asp-controller="Reservations" class="menu-nav_link">Reservation</a>
->>>>>>> Stashed changes
+
                 </li>
                 <li class="menu-nav_item">
                     <a asp-action="Login" asp-area="" asp-controller="Home" class="menu-nav_link">Login</a>
