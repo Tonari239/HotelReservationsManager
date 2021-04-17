@@ -1,4 +1,4 @@
-using DataLibrary;
+﻿using DataLibrary;
 using DataLibrary.Entities;
 using DataLibrary.Repositories;
 using HotelReservationsManager.Controllers;
@@ -15,17 +15,17 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    public class RoomsControllerTest
+    public class ClientsControllerTest
     {
         private HotelDbContext _context;
-        private RoomsController _controller;
+        private ClientsController _controller;
 
         [SetUp]
         public void Setup()
         {
 
             _context = new HotelDbContext();
-            _controller = new RoomsController(_context);
+            _controller = new ClientsController(_context);
 
         }
 
@@ -60,6 +60,7 @@ namespace Test
             var result = _controller.Delete(-1) as NotFoundResult;
             Assert.AreEqual(404, result.StatusCode);
         }
+
 
 
         [Test]

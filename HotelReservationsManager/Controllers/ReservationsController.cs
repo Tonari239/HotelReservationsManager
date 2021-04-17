@@ -13,12 +13,13 @@ using HotelReservationsManager.Models.Reservation;
 using HotelReservationsManager.Models.Room;
 using HotelReservationsManager.Models.Client;
 using DataLibrary.Repositories;
-
+using HotelReservationsManager.Models.Shared;
 
 namespace HotelReservationsManager.Controllers
 {
     public class ReservationsController : Controller
     {
+        private readonly int PageSize = GlobalVar.AmountOfElementsDisplayedPerPage;
         private readonly HotelDbContext _context;
         private readonly ReservationCRUDRepository _reservationRepo;
         private readonly RoomCRUDRepository _roomRepo;
@@ -71,55 +72,16 @@ namespace HotelReservationsManager.Controllers
         }
         public IActionResult Index()
         {
-            /* List<Reservation> reservations = _context.Reservations.ToList();
-             List<ReservationViewModel> list = new List<ReservationViewModel>();
-
-             foreach (var reservation in reservations)
-             {
-                 int userId = reservation.UserId;
-                 int roomId = reservation.RoomId;
-
-                 ClientViewModel clientVM = new ClientViewModel()
-                 {
-                     Id = reservation.Client.Id,
-                     FirstName = reservation.Client.FirstName,
-                     LastName = reservation.Client.LastName,
-                 };
-
-                 RoomViewModel roomVM = new RoomViewModel()
-                 {
-                     Id = reservation.Room.Id,
-                     Capacity = reservation.Room.Capacity,
-                     BedPriceForAdult = reservation.Room.BedPriceForAdult,
-                     BedPriceForKid = reservation.Room.BedPriceForKid,
-                     Number = reservation.Room.Number,
-                     Type = (RoomTypeEnum)reservation.Room.Type
-                 };
-
-                 int clientsCount = _context.ClientReservation.Where(x => x.ReservationId == reservation.Id).Count();
-
-                 list.Add(new ReservationViewModel()
-                 {
-                     Id = reservation.Id,
-                     Client = clientVM,
-                     Room = roomVM,
-                     CurrentReservationClientCount = clientsCount,
-                     AccomodationName = reservation.AccommodationDate,
-                     LeaveDate = reservation.LeaveDate,
-                     AllInclusive = reservation.AllInclusive,
-                     BreakfastIncluded = reservation.BreakfastIncluded,
-                     Cost = reservation.Cost,
-                 });
-
-             }
-            */
+            _reservationIndexViewModels.Pager ??= new PagerViewModel();
+            _reservationIndexViewModels.Pager.CurrentPage = _reservationIndexViewModels.Pager.CurrentPage <= 0 ? 1 : _reservationIndexViewModels.Pager.CurrentPage;
+            _reservationIndexViewModels.Pager.PagesCount = Math.Max(1, (int)Math.Ceiling(_context.Reservations.Count() / (double)PageSize));
             return View("Index", _reservationIndexViewModels);
         }
         // GET: Reservations/Create
 
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Reservations/Create        
@@ -153,7 +115,7 @@ namespace HotelReservationsManager.Controllers
                     Reservation = _reservationRepo.GetById(reservationVM.Id)
 
 
-                }) // ima shans da izgurmi s nesaotvetstvie na Data structure ; ako da promenqme vsichko na ICOllection i hashset
+                }) 
             };
 
             _reservationRepo.Add(reservation);
@@ -174,7 +136,7 @@ namespace HotelReservationsManager.Controllers
             {
                 return NotFound();
             }
-            return View(reservationVM);
+            return View("Edit",reservationVM);
         }
 
         // POST: Clients/Edit/5       

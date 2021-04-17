@@ -19,15 +19,19 @@
             <input asp-for="ClientsViewModels" required type="text" />
             <span asp-validation-for="ClientsViewModels"></span>
             <label > Clients</label>
+
         </div>
         <div class="txt_field">
             <input asp-for="AccommodationDate" required type="text" />
             <span asp-validation-for="AccommodationDate"></span>
+
             <label> Accomodation Date</label>
+
         </div>
         <div class="txt_field">
             <input asp-for="LeaveDate" required type="text" />
             <span asp-validation-for="LeaveDate"></span>
+
             <label> Leave Date</label>
         </div>
         <div class="txt_field">
@@ -40,7 +44,8 @@
             
             <input class="form-check-input" asp-for="AllInclusive" /> @Html.DisplayNameFor(model => model.AllInclusive)
             <span></span>
-            <label></label>
+          <label></label>
+            <label asp-for="LeaveDate"></label>
         </div>
         <div>
             <input type="submit" value="Create" class="submit" />
