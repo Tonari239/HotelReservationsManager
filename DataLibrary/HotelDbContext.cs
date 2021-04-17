@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Text;
 
 namespace DataLibrary
@@ -16,7 +17,7 @@ namespace DataLibrary
         
 =======
 
-        public HotelDbContext(DbContextOptions<HotelDbContext> options) : base(options)
+        public HotelDbContext(DbContextOptions<HotelDbContext> options) :base(options)
         {
 
         }

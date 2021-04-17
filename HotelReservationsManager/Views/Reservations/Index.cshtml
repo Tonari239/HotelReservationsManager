@@ -1,0 +1,84 @@
+@model HotelReservationsManager.Models.Reservation.ReservationIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="center_index">
+    <a asp-action="Create" asp-controller="Reservations">Create New</a>
+    <h1>Reservations</h1>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>
+                    Reserved Room
+                </th>
+                <th>
+                    Reserved By
+                </th>
+                <th>
+                    Clients
+                </th>
+                <th>
+                    Date of Accomodation
+                </th>
+                <th>
+                    Date of Leave
+                </th>
+                <th>
+                    Breakfast included
+
+                </th>
+                <th>
+                    All inclusive
+                </th>
+                <th>
+                    All costs
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr class="active-row">
+                    <td>
+                        @item.RoomViewModel
+                    </td>
+                    <td>
+                        @item.UserId
+                    </td>
+                    <td>
+                        @item.ClientsViewModels
+                    </td>
+                    <td>
+                        @item.AccommodationDate
+                    </td>
+                    <td>
+                        @item.LeaveDate
+                    </td>
+                    <td>
+                        @item.BreakfastIncluded
+                    </td>
+                    <td>
+                        @item.AllInclusive
+                    </td>
+                    <td>
+                        @item.Cost
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+
+    </table>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

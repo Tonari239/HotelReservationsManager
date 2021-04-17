@@ -21,6 +21,7 @@ namespace DataLibrary.Entities
         public RoomTypeEnum Type { get; set; }
 <<<<<<< Updated upstream
 
+<<<<<<< Updated upstream
         private bool isFree;
 
         public bool IsFree
@@ -32,6 +33,9 @@ namespace DataLibrary.Entities
             }
         }
 =======
+>>>>>>> Stashed changes
+=======
+        public bool IsFree { get; set; }
 >>>>>>> Stashed changes
 
         public bool IsFree { get; set; }

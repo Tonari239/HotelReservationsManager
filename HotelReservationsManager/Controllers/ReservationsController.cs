@@ -45,6 +45,7 @@ namespace HotelReservationsManager.Controllers
             });
             _reservationIndexViewModels.Items = _reservationRepo.GetAll().Select(x => new ReservationViewModel()
             {
+
                 Id = x.Id,
                 AccommodationDate = x.AccommodationDate,
                 LeaveDate = x.LeaveDate,
@@ -53,17 +54,19 @@ namespace HotelReservationsManager.Controllers
                 Cost = x.Cost,
                 UserId = x.UserId,
                 RoomViewModel = _roomIndexViewModels.Items.FirstOrDefault(r => r.Id == x.RoomId),
-                ClientsViewModels = x.Clients.Select(p => new ClientViewModel()
+                ClientsViewModels = (IQueryable<ClientViewModel>)x.Clients.Select(c => new ClientViewModel()
                 {
-                    Id = p.Id,
-                    Email = p.Email,
-                    FirstName = p.FirstName,
-                    IsAdult = p.IsAdult,
-                    LastName = p.LastName,
-                    PhoneNumber = p.PhoneNumber,
-                    Reservation = _reservationRepo.GetById(p.ReservationId)
-                }).AsQueryable<ClientViewModel>()
-            }); ;
+                    Id = c.Id,
+                    Email = c.Email,
+                    FirstName = c.FirstName,
+                    IsAdult = c.IsAdult,
+                    LastName = c.LastName,
+                    PhoneNumber = c.PhoneNumber,
+                    ReservationId = c.ReservationId
+
+
+                })
+            });
         }
         public IActionResult Index()
         {

@@ -15,12 +15,14 @@ namespace HotelReservationsManager.Controllers
     {
         private readonly HotelDbContext _context;
         private readonly ClientCRUDRepository _repo;
+        private readonly ReservationCRUDRepository _reservationRepo;
         ClientIndexViewModel _clientIndexViewModels = new ClientIndexViewModel();
 
         public ClientsController(HotelDbContext context)
         {
             _context = context;
             _repo = new ClientCRUDRepository(_context);
+            _reservationRepo = new ReservationCRUDRepository(_context);
             _clientIndexViewModels.Items = _repo.GetAll().Select(x => new ClientViewModel()
             {
                 Email = x.Email,
@@ -29,7 +31,7 @@ namespace HotelReservationsManager.Controllers
                 IsAdult = x.IsAdult,
                 LastName = x.LastName,
                 PhoneNumber = x.PhoneNumber,
-                Reservation = _context.Reservations.FirstOrDefault(r => r.Id == x.Reservation.Id)
+                ReservationId=x.ReservationId
             }); ;
         }
 
@@ -83,7 +85,8 @@ namespace HotelReservationsManager.Controllers
                 FirstName = clientVM.FirstName,
                 LastName = clientVM.FirstName,
                 PhoneNumber = clientVM.PhoneNumber,
-                Reservation = _context.Reservations.FirstOrDefault(r => r.Id == clientVM.Reservation.Id)
+                Reservation = _reservationRepo.GetById(clientVM.ReservationId),
+                ReservationId=clientVM.ReservationId
             };
             _repo.Add(Client);
             return RedirectToAction("Index", "Clients");
@@ -123,7 +126,9 @@ namespace HotelReservationsManager.Controllers
             client.IsAdult = vm.IsAdult;
             client.LastName = vm.LastName;
             client.PhoneNumber = vm.PhoneNumber;
-            client.Reservation = vm.Reservation;
+            client.Reservation = _reservationRepo.GetById(vm.ReservationId);
+            client.ReservationId = vm.ReservationId;
+            
             
             //TODO: ADD THIS client.Reservation=vm.Reservation but with View model
 
