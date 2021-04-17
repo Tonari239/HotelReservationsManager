@@ -1,5 +1,9 @@
+
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace DataLibrary.Entities
 {
@@ -10,18 +14,10 @@ namespace DataLibrary.Entities
 
         public int Capacity { get; set; }
 
-        public int Type { get; set; }
+        public RoomTypeEnum Type { get; set; }
 
-        private bool isFree;
+        public bool IsFree { get; set; }
 
-        public bool IsFree
-        {
-            get { return isFree; }
-            set 
-            {
-               isFree= DateTime.Compare(Reservation.LeaveDate, DateTime.Now) <= 0 ? true : false;
-            }
-        }
 
 
         public decimal BedPriceForAdult { get; set; }
@@ -31,6 +27,7 @@ namespace DataLibrary.Entities
         public int Number { get; set; }
 
         //Navigation Properties
+        public int ReservationId { get; set; }
         public virtual Reservation Reservation { get; set; }
 
     }

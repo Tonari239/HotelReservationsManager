@@ -3,31 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataLibrary;
 using DataLibrary.Entities;
-using HotelReservationsManager.Models;
+using DataLibrary.Repositories;
 using HotelReservationsManager.Models.Room;
-<<<<<<< Updated upstream
-using HotelReservationsManager.Models.Shared;
-using DataLibrary.Enumeration;
-using HotelReservationsManager.Models.Rooms;
 using HotelReservationsManager.Models.Validation;
-using HotelReservationsManager.Models.Filters;
-=======
-using HotelReservationsManager.Models.Validation;
->>>>>>> Stashed changes
 
 namespace HotelReservationsManager.Controllers
 {
     public class RoomsController : Controller
     {
         private readonly int PageSize = GlobalVar.AmountOfElementsDisplayedPerPage;
-<<<<<<< Updated upstream
-        private readonly HotelDbContext _context;
-
-        public RoomsController()
-=======
 
         private readonly HotelDbContext _context;
         private readonly RoomCRUDRepository _repo;
@@ -43,70 +31,61 @@ namespace HotelReservationsManager.Controllers
             return RedirectToAction("Index");
         }
         public RoomsController(HotelDbContext context)
->>>>>>> Stashed changes
         {
-            _context = new HotelDbContext();
+            _context = context;
+            _repo = new RoomCRUDRepository(_context);
+            _reservationRepo = new ReservationCRUDRepository(_context);
+            _roomIndexViewModels.Items = _repo.GetAll().Select(x => new RoomViewModel()
+            {
+                Id=x.Id,
+                BedPriceForAdult=x.BedPriceForAdult,
+                BedPriceForKid=x.BedPriceForKid,
+                Capacity=x.Capacity,
+                IsFree=x.IsFree,
+                Number=x.Number,
+                Type=x.Type,
+                ReservationId=x.ReservationId,
+                
+            });
         }
 
-        public IActionResult ChangePageSize(int id)
+        // GET: Rooms
+        public IActionResult Index()
         {
-            if (id > 0)
+            return View("Index",_roomIndexViewModels);
+        }
+
+        // GET: Rooms/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
             {
-                GlobalVar.AmountOfElementsDisplayedPerPage = id;
+                return NotFound();
             }
 
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Index(RoomsIndexViewModel model)
-        {
-
-            UpdateRoomOccupacity();
-
-
-            if (GlobalVar.LoggedOnUserId == -1)
+            var RoomViewModel = await _roomIndexViewModels.Items
+                .FirstOrDefaultAsync(vm => vm.Id == id);
+            if (RoomViewModel == null)
             {
-                return RedirectToAction("LogInRequired", "Users");
+                return NotFound();
             }
 
-            model.Pager ??= new PagerViewModel();
-            model.Pager.CurrentPage = model.Pager.CurrentPage <= 0 ? 1 : model.Pager.CurrentPage;
-
-            var contextDb = Filter(_context.Rooms.ToList(), model.Filter);
-
-            List<RoomsViewModel> items = contextDb.Skip((model.Pager.CurrentPage - 1) * PageSize).Take(PageSize).Select(c => new RoomsViewModel()
-            {
-                Id = c.Id,
-                Number = c.Number,
-                BedPriceForAdult = c.BedPriceForAdult,
-                BedPriceForKid = c.BedPriceForKid,
-                Type = (RoomTypeEnum)c.Type,
-                Capacity = c.Capacity,
-                IsFree = c.IsFree
-            }).ToList();
-
-            model.Items = items;
-            model.Pager.PagesCount = Math.Max(1, (int)Math.Ceiling(contextDb.Count() / (double)PageSize));
-
-            return View(model);
+            return View(RoomViewModel);
         }
 
+        // GET: Rooms/Create
         public IActionResult Create()
         {
-            if (GlobalVar.LoggedOnUserRights != GlobalVar.UserRights.Admininstrator)
-            {
-                return RedirectToAction("LogInPermissionDenied", "Users");
-            }
-
-            return View(new RoomsCreateViewModel());
+            return View("Create");
         }
-       
+
+        // POST: Rooms/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(RoomsCreateViewModel createModel)
+        public  IActionResult Create(RoomViewModel roomVM)
         {
-<<<<<<< Updated upstream
-=======
             if (!ModelState.IsValid)
             {
                 return View(roomVM);
@@ -121,9 +100,9 @@ namespace HotelReservationsManager.Controllers
             }
             catch (InvalidOperationException e)
             {
+                //roomVM.Message = e.Message;
                 return View(roomVM);
             }
-
             Room room = new Room()
             {
                 
@@ -139,93 +118,32 @@ namespace HotelReservationsManager.Controllers
             };
             _repo.Add(room);
             return  RedirectToAction("Index", "Rooms");
->>>>>>> Stashed changes
 
-            if (GlobalVar.LoggedOnUserRights != GlobalVar.UserRights.Admininstrator)
-            {
-                return RedirectToAction("LogInPermissionDenied", "Users");
-            }
-            createModel.Message = null;
-            if (ModelState.IsValid)
-            {
-
-                try
-                {
-                    Validate(new Validation_Room()
-                    {
-                        Capacity = createModel.Capacity,
-                        Number = createModel.Number
-                    });
-                }
-                catch (InvalidOperationException e)
-                {
-                    createModel.Message = e.Message;
-                    return View(createModel);
-                }
-
-
-
-                if (_context.Rooms.Where(x => x.Number == createModel.Number).Count() > 0)
-                {
-                    createModel.Message = $"Room cant be created becuase there's already an existing room with the given number ({createModel.Number})";
-                    return View(createModel);
-                }
-
-                Room room = new Room
-                {
-                    Number = createModel.Number,
-                    BedPriceForAdult = createModel.PriceAdult,
-                    BedPriceForKid = createModel.PriceChild,
-                    Type = (int)createModel.RoomType,
-                    Capacity = createModel.Capacity
-                };
-
-                _context.Rooms.Add(room);
-                _context.SaveChanges();
-
-                return RedirectToAction(nameof(Index));
-            }
-
-            return RedirectToAction(nameof(Index));
         }
 
+        // GET: Rooms/Edit/5
         public IActionResult Edit(int? id)
         {
-
-            if (GlobalVar.LoggedOnUserRights != GlobalVar.UserRights.Admininstrator)
-            {
-                return RedirectToAction("LogInPermissionDenied", "Users");
-            }
-
-            if (id == null || !RoomExists((int)id))
+            if (id == null || id <=0)
             {
                 return NotFound();
             }
-
-            Room room = _context.Rooms.Find(id);
-
-            RoomsEditViewModel model = new RoomsEditViewModel
+            RoomViewModel roomVM = _roomIndexViewModels.Items.FirstOrDefault(x => x.Id == id);
+            
+            if (roomVM == null)
             {
-                Id = room.Id,
-                Number = room.Number,
-                PriceAdult = room.BedPriceForAdult,
-                PriceChild = room.BedPriceForKid,
-                RoomType = (RoomTypeEnum)room.Type,
-                Capacity = room.Capacity,
-                IsFree = room.IsFree
-            };
-
-            return View(model);
+                return NotFound();
+            }
+            return View("Edit",roomVM);
         }
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(RoomsEditViewModel editModel)
+        public  IActionResult Edit(RoomViewModel vm)
         {
-
-            if (GlobalVar.LoggedOnUserRights != GlobalVar.UserRights.Admininstrator)
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction("LogInPermissionDenied", "Users");
+                return View(vm);
             }
             try
             {
@@ -237,92 +155,54 @@ namespace HotelReservationsManager.Controllers
             }
             catch (InvalidOperationException e)
             {
+                //vm.Message = e.Message;
                 return View(vm);
             }
+            Room room = _repo.GetById(vm.Id);
+            room.Id = vm.Id;
+            room.BedPriceForAdult = vm.BedPriceForAdult;
+            room.BedPriceForKid = vm.BedPriceForKid;
+            room.Capacity = vm.Capacity;
+            room.IsFree = vm.IsFree;
+            room.Number = vm.Number;
+            room.Type = vm.Type;
+            room.Reservation = _context.Reservations.Find(vm.ReservationId);
+            room.ReservationId = vm.ReservationId;
+            
 
-            if (ModelState.IsValid)
-            {
 
-                if (!RoomExists(editModel.Id))
-                {
-                    return NotFound();
-                }
 
-                try
-                {
-                    Validate(new Validation_Room()
-                    {
-                        Capacity = editModel.Capacity,
-                        Number = editModel.Number
-                    });
-                }
-                catch (InvalidOperationException e)
-                {
-                    editModel.Message = e.Message;
-                    return View(editModel);
-                }
 
-                Room room = new Room()
-                {
-                    Id = editModel.Id,
-                    Number = editModel.Number,
-                    BedPriceForAdult = editModel.PriceAdult,
-                    BedPriceForKid = editModel.PriceChild,
-                    Type = (int)editModel.RoomType,
-                    Capacity = editModel.Capacity
-                };
-
-                _context.Update(room);
-                _context.SaveChanges();
-
-                UpdateAllReservationsOverallPriceRelatedToRoom(room.Id);
-
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(editModel);
+            _repo.Update(room);
+            return RedirectToAction("Index", "Rooms");
         }
+    
 
-        public IActionResult Delete(int? id)
+        // GET: Rooms/Delete/5
+        public  IActionResult Delete(int? id)
         {
-
-            if (GlobalVar.LoggedOnUserRights != GlobalVar.UserRights.Admininstrator)
-            {
-                return RedirectToAction("LogInPermissionDenied", "Users");
-            }
-
-            if (id == null || !RoomExists((int)id))
+            if (id == null || id <=0)
             {
                 return NotFound();
             }
 
-            Room room = _context.Rooms.Find(id);
-            _context.Rooms.Remove(room);
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(Index));
-        }
-
-
-        private void UpdateRoomOccupacity()
-        {
-            foreach (var room in _context.Rooms.ToList())
+            var roomVM = _roomIndexViewModels.Items.FirstOrDefault(x => x.Id == id);
+            if (roomVM == null)
             {
-                var reservations = _context.Reservations.Where(x => x.RoomId == room.Id);
-                bool isFree = true;
-                foreach (var reservation in reservations)
-                {
-                    if (reservation.AccommodationDate.AddHours(GlobalVar.DefaultReservationHourStart) < DateTime.UtcNow && DateTime.UtcNow < reservation.LeaveDate.AddHours(GlobalVar.DefaultReservationHourStart))
-                    {
-                        isFree = false;
-                        break;
-                    }
-                }
-                room.IsFree = isFree;
-                _context.Rooms.Update(room);
-                _context.SaveChanges();
+                return NotFound();
             }
 
+            return View("Delete",roomVM);
+        }
+
+        // POST: Rooms/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var room = _repo.GetById(id);
+            _repo.Remove(room);
+            return RedirectToAction(nameof(Index));
         }
         private void Validate(Validation_Room model)
         {
@@ -342,94 +222,5 @@ namespace HotelReservationsManager.Controllers
         {
             return _context.Rooms.Any(e => e.Id == id);
         }
-
-        private void Validate(Validation_Room model)
-        {
-
-            if (model.Number <= 0)
-            {
-                throw new InvalidOperationException("Room number must be positive integer");
-            }
-
-            if (model.Capacity <= 0)
-            {
-                throw new InvalidOperationException("Room capacity must be positive integer");
-            }
-
-        }
-
-        private List<Room> Filter(List<Room> collection, RoomsFilterViewModel filterModel)
-        {
-
-            if (filterModel != null)
-            {
-                if (filterModel.Capacity != null)
-                {
-                    collection = collection.Where(x => x.Capacity == filterModel.Capacity).ToList();
-                }
-                if (filterModel.Type != null)
-                {
-                    collection = collection.Where(x => x.Type == (int)filterModel.Type).ToList();
-                }
-                if (filterModel.IsFree != null)
-                {
-                    collection = collection.Where(x => x.IsFree == filterModel.IsFree).ToList();
-                }
-
-            }
-
-            return collection;
-        }
-
-        private void UpdateAllReservationsOverallPriceRelatedToRoom(int roomId)
-        {
-            List<Reservation> reservations = _context.Reservations.Where(x => x.RoomId == roomId).ToList();
-
-            foreach (var reservation in reservations)
-            {
-                int days = CalculateDaysPassed(reservation.AccommodationDate, reservation.LeaveDate);
-                List<int> clientsId = _context.ClientReservation.Where(x => x.ReservationId == reservation.Id).Select(x => x.ClientId).ToList();
-                decimal bill = 0;
-                Room room = _context.Rooms.Find(reservation.RoomId);
-                foreach (var clientId in clientsId)
-                {
-                    bill += (_context.Clients.Find(clientId).IsAdult) ? (room.BedPriceForAdult) : (room.BedPriceForKid);
-                }
-                bill = AddExtras(bill, reservation.AllInclusive, reservation.BreakfastIncluded);
-                reservation.Cost = bill;
-                _context.Reservations.Update(reservation);
-                _context.SaveChanges();
-            }
-
-        }
-
-        private int CalculateDaysPassed(DateTime startDate, DateTime endDate)
-        {
-            double daysDiffDouble = (endDate - startDate).TotalDays;
-
-            int daysDiff = (int)daysDiffDouble;
-            if (daysDiffDouble > daysDiff)
-            {
-                daysDiff++;
-            }
-
-            return daysDiff;
-
-        }
-
-        private decimal AddExtras(decimal money, bool isAllInclusive, bool isBreakfastIncluded)
-        {
-            decimal bonusPercentage = 0;
-            if (isAllInclusive)
-            {
-                bonusPercentage += GlobalVar.AllInclusiveExtraBillPercentage;
-            }
-            if (isBreakfastIncluded)
-            {
-                bonusPercentage += GlobalVar.InlcludedBreakfastExtraBillPercentage;
-            }
-            return money * (1 + bonusPercentage / 100);
-        }
-
     }
 }

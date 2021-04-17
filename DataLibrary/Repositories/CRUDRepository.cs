@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DataLibrary.Repositories
 {
-    public abstract class CRUDRepository<T>  where T : class
+    public abstract class CRUDRepository<T> where T : class
     {
 
         private readonly HotelDbContext _context;
@@ -29,7 +29,7 @@ namespace DataLibrary.Repositories
             _dbSet.Add(item);
             _context.SaveChanges();
             return true;
-            
+
         }
         public bool Remove(T item)
         {
@@ -41,7 +41,7 @@ namespace DataLibrary.Repositories
             _context.SaveChanges();
             return true;
         }
-        
+
         public void Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
@@ -53,36 +53,39 @@ namespace DataLibrary.Repositories
             return _dbSet.Count();
         }
 
-         public int Count(Expression<Func<T, bool>> expression)
-         {
+        public int Count(Expression<Func<T, bool>> expression)
+        {
             return _dbSet.Count(expression);
-         }
+        }
 
-        public IQueryable Get(Expression<Func<T,bool>> expression)
+
+
+        public IQueryable<T> Get(Expression<Func<T, bool>> expression)
+
         {
             return _dbSet.Where(expression).AsQueryable();
         }
 
-        public IQueryable GetAll()
+        public IQueryable<T> GetAll()
         {
             return _dbSet.AsQueryable();
         }
 
         public T GetById(int? id)
         {
-            if (id==null || id ==0)
+            if (id == null || id == 0)
             {
                 return null;
             }
-           return _dbSet.Find(id);
+            return _dbSet.Find(id);
         }
 
-        public IQueryable OrderBy(Func<T,bool> expression)
+        public IQueryable<T> OrderBy(Func<T, bool> expression)
         {
             return _dbSet.OrderBy(expression).AsQueryable();
         }
 
-        
+
 
     }
 }

@@ -1,0 +1,74 @@
+﻿@model HotelReservationsManager.Models.Room.RoomIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="center_index">
+    <a asp-action="Create" asp-controller="Rooms">Create New</a>
+    <h1>Index</h1> 
+    <table class="styled-table">
+        <thead>
+            
+            <tr>
+                
+                <th>
+                    Number
+                </th>
+                <th>
+                    Capacity
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Occupied
+                </th>
+                <th>
+                    Bed Price for Adult
+                </th>
+                <th>
+                    Bed Price for Kid
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+             {
+                <tr class="active-row">
+                    <td>
+                        @item.Number
+                    </td>
+                    <td>
+                        @item.Capacity
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        @(item.IsFree==true?"yes":"no")
+                    </td>
+                    <td>
+                        @item.BedPriceForAdult
+                    </td>
+                    <td>
+                        @item.BedPriceForKid
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+
+    </table>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

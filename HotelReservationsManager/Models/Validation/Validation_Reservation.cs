@@ -15,10 +15,10 @@ namespace HotelReservationsManager.Models.Validation
         public int ReservationId { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime AccomodationDate { get; set; }
+        public DateTime DateOfAccommodation { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime LeaveDate { get; set; }
+        public DateTime DateOfExemption { get; set; }
 
     }
 }

@@ -15,13 +15,13 @@ namespace DataLibrary.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("DataLibrary.Entities.Client", b =>
                 {
-                    b.Property<int>("ClientId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -41,10 +41,10 @@ namespace DataLibrary.Migrations
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReservationId")
+                    b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
-                    b.HasKey("ClientId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ReservationId");
 
@@ -53,7 +53,7 @@ namespace DataLibrary.Migrations
 
             modelBuilder.Entity("DataLibrary.Entities.Reservation", b =>
                 {
-                    b.Property<int>("ReservationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -79,7 +79,7 @@ namespace DataLibrary.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("ReservationId");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoomId")
                         .IsUnique();
@@ -91,7 +91,7 @@ namespace DataLibrary.Migrations
 
             modelBuilder.Entity("DataLibrary.Entities.Room", b =>
                 {
-                    b.Property<int>("RoomID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -111,17 +111,20 @@ namespace DataLibrary.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
 
-                    b.HasKey("RoomID");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("DataLibrary.Entities.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -159,7 +162,7 @@ namespace DataLibrary.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
@@ -168,9 +171,9 @@ namespace DataLibrary.Migrations
                 {
                     b.HasOne("DataLibrary.Entities.Reservation", "Reservation")
                         .WithMany("Clients")
-                        .HasForeignKey("ReservationId");
-
-                    b.Navigation("Reservation");
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DataLibrary.Entities.Reservation", b =>
@@ -186,25 +189,6 @@ namespace DataLibrary.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Room");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DataLibrary.Entities.Reservation", b =>
-                {
-                    b.Navigation("Clients");
-                });
-
-            modelBuilder.Entity("DataLibrary.Entities.Room", b =>
-                {
-                    b.Navigation("Reservation");
-                });
-
-            modelBuilder.Entity("DataLibrary.Entities.User", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }
