@@ -1,0 +1,67 @@
+﻿@model HotelReservationsManager.Models.Client.ClientIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="center_index">
+    <a asp-action="Create" asp-controller="Clients">Create New</a>
+    <h1>Index</h1>
+    <table class="styled-table">
+        <thead>
+
+            <tr>
+
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Adult
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr class="active-row">
+                    <td>
+                        @item.FirstName
+                    </td>
+                    <td>
+                        @item.LastName
+                    </td>
+                    <td>
+                        @item.PhoneNumber
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @(item.IsAdult==true?"yes":"no")
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+
+    </table>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

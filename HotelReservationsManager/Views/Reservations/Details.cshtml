@@ -7,53 +7,44 @@
 <div class="center_view">
 
     <h1>Create Reservation</h1>
-    <hr />
-    <form asp-action="Create" asp-controller="Reservations" method="post">
         <div asp-validation-summary="ModelOnly"></div>
         <div class="txt_field">
             <input asp-for="RoomViewModel.Id" required type="text" />
             <span asp-validation-for="RoomViewModel.Id"></span>
-            <label> Room</label>
+            <label asp-for="RoomViewModel.Id"></label>
         </div>
         <div class="txt_field">
             <input asp-for="ClientsViewModels" required type="text" />
             <span asp-validation-for="ClientsViewModels"></span>
-            <label > Clients</label>
-
+            <label asp-for="ClientsViewModels"></label>
         </div>
         <div class="txt_field">
             <input asp-for="AccommodationDate" required type="text" />
             <span asp-validation-for="AccommodationDate"></span>
-
-            <label> Accomodation Date</label>
-
+            <label asp-for="AccommodationDate" class="control-label"></label>
         </div>
         <div class="txt_field">
             <input asp-for="LeaveDate" required type="text" />
             <span asp-validation-for="LeaveDate"></span>
-
-            <label> Leave Date</label>
+            <label asp-for="LeaveDate"></label>
         </div>
         <div class="txt_field">
 
-            
+
             <input class="form-check-input" asp-for="BreakfastIncluded" /> @Html.DisplayNameFor(model => model.BreakfastIncluded)
             <span></span>
         </div>
         <div class="txt_field">
-            
+
             <input class="form-check-input" asp-for="AllInclusive" /> @Html.DisplayNameFor(model => model.AllInclusive)
             <span></span>
-          <label></label>
-            <label asp-for="LeaveDate"></label>
+            <label></label>
         </div>
-        <div>
-            <input type="submit" value="Create" class="submit" />
-            <span>
-            </span>
-        </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
 
-    </form>
     <div class="back_link">
         <a asp-action="Index">Back</a>
     </div>

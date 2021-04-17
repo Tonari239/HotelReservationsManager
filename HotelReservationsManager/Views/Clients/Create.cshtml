@@ -1,0 +1,52 @@
+﻿@model HotelReservationsManager.Models.Client.ClientViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="center_view">
+
+    <h1>Create Room</h1>
+    <hr />
+    <form asp-action="Create" asp-controller="Clients" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="txt_field">
+            <input asp-for="FirstName" required type="text" />
+            <span asp-validation-for="FirstName"></span>
+            <label>First Name </label>
+        </div>
+        <div class="txt_field">
+            <input asp-for="LastName" required type="text" />
+            <span asp-validation-for="LastName"></span>
+            <label>Last Name </label>
+        </div>
+        <div class="txt_field">
+            <input asp-for="PhoneNumber" required type="text" />
+            <span asp-validation-for="PhoneNumber"></span>
+            <label>Phone Number</label>
+        </div>
+        <div class="txt_field">
+            <input asp-for="Email" required type="text" />
+            <span asp-validation-for="Email"></span>
+            <label> Email</label>
+        </div>
+        <div class="txt_field">
+            <input class="form-check-input" asp-for="IsAdult" /> @Html.DisplayNameFor(model => model.IsAdult)
+            <span></span>
+        </div>
+        <div>
+            <input type="submit" value="Create" class="submit" />
+            <span>
+            </span>
+        </div>
+
+    </form>
+    <div class="back_link">
+        <a asp-action="Index">Back</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

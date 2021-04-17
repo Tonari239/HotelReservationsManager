@@ -1,4 +1,5 @@
-﻿@model HotelReservationsManager.Models.Reservation.ReservationViewModel
+﻿
+@model HotelReservationsManager.Models.Reservation.ReservationViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -6,46 +7,41 @@
 
 <div class="center_view">
 
-    <h1>Create Reservation</h1>
+    <h1>Edit Reservation</h1>
     <hr />
-    <form asp-action="Create" asp-controller="Reservations" method="post">
+    <form asp-action="Edit" asp-controller="Reservations" method="post">
         <div asp-validation-summary="ModelOnly"></div>
         <div class="txt_field">
             <input asp-for="RoomViewModel.Id" required type="text" />
             <span asp-validation-for="RoomViewModel.Id"></span>
-            <label> Room</label>
+            <label > Room</label>
         </div>
         <div class="txt_field">
             <input asp-for="ClientsViewModels" required type="text" />
             <span asp-validation-for="ClientsViewModels"></span>
-            <label > Clients</label>
-
+            <label> Clients</label>
         </div>
         <div class="txt_field">
             <input asp-for="AccommodationDate" required type="text" />
             <span asp-validation-for="AccommodationDate"></span>
-
-            <label> Accomodation Date</label>
-
+            <label > Accomodation Date</label>
         </div>
         <div class="txt_field">
             <input asp-for="LeaveDate" required type="text" />
             <span asp-validation-for="LeaveDate"></span>
-
             <label> Leave Date</label>
         </div>
         <div class="txt_field">
 
-            
+
             <input class="form-check-input" asp-for="BreakfastIncluded" /> @Html.DisplayNameFor(model => model.BreakfastIncluded)
             <span></span>
         </div>
         <div class="txt_field">
-            
+
             <input class="form-check-input" asp-for="AllInclusive" /> @Html.DisplayNameFor(model => model.AllInclusive)
             <span></span>
-          <label></label>
-            <label asp-for="LeaveDate"></label>
+            <label></label>
         </div>
         <div>
             <input type="submit" value="Create" class="submit" />
