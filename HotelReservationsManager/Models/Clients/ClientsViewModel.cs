@@ -19,7 +19,7 @@ namespace HotelReservationsManager.Models.Client
         [MaxLength(10, ErrorMessage = "Моля въведете валиден телефонен номер!")]
         [Required]
         [Display(Name = "Телефонен номер")]
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
 
         [EmailAddress(ErrorMessage = "Моля въведете валиден имейл адрес!")]
         [Required]

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace DataLibrary.Entities
 {
@@ -11,12 +14,14 @@ namespace DataLibrary.Entities
 
         public string LastName { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
 
         public string Email { get; set; }
 
         public bool IsAdult { get; set; }
-        
+
+        //Navigation Properties
+        public int ReservationId { get; set; }
         public virtual Reservation Reservation { get; set; }
     }
 }

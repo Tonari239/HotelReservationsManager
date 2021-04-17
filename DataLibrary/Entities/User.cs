@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace DataLibrary.Entities
 {
@@ -18,27 +19,25 @@ namespace DataLibrary.Entities
 
         public string LastName { get; set; }
 
-        public string CivilNumber { get; set; } // ЕГН
+        public int CivilNumber { get; set; } // ЕГН
 
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
 
         public string Email { get; set; }
 
         public DateTime EmploymentDate { get; set; }
-        
-        public DateTime? LeavingDate { get; set; }
 
         public bool IsActive { get; set; }
+        
+        public DateTime LeavingDate { get; set; }
 
         //Navigation Properties
-
+        
+      //TODO: MAKE A COLLECTION  
         public virtual ICollection<Reservation> Reservations { get; set; }
-
         public User()
         {
-            this.IsActive = true;
-            this.LeavingDate = null;
-            this.Reservations = new List<Reservation>();
+            Reservations = new HashSet<Reservation>();
         }
     }
 }
